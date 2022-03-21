@@ -1,4 +1,35 @@
 '''
+字典的增删改查：
+dic = {"one":1, "two":2}
+增：
+1. 通过键值对增  dic[key] = value
+2. setdefault() 如果key存在，则不改变原值，若不存在则新增
+
+删：
+1. pop()，通过字典的key删除，若key不存在，则返回None，可设置返回值
+2. popitem()  3.6版本后默认删除最后一个键值对，有返回值
+3. del dic[key] 通过key删除
+4. del dic  删除整个字典
+5. clear() dic.clear() 清空字典
+
+改：
+1. 通过key改  dic[key] = value,如果key不存在，则抛出KeyError异常
+2. update() dict1.update(dict2),即把 dict2追加到dict1中
+
+查：
+1. 通过 key查询，若key不存在，则抛出KeyError异常
+2. get(key), 如果key不存在，则返回默认值 None, 可设置返回值
+
+3. dict.keys() 获取所有的key, 伪列表形式
+4.dict.values() 获取所有的value，伪列表形式
+5.dict.items() 获取所有的Key, value， 伪列表，元素为每一组(key,value)组成的元组
+
+'''
+dic = {"one":1}
+print(dic.get("two", "Key不存在"))
+print(dic.get("one", "key不存在"))
+
+'''
 创建字典
 '''
 # 方式一
@@ -101,21 +132,21 @@ value = dict1.get("four", "key不存在")
 
 # 3. keys() 遍历所有key, 类型为 dict_keys 的伪列表形式
 values = dict1.keys() # dict_keys(['one', 'two', 'three', 'four']) <class 'dict_keys'>
-print(values, type(values))
+# print(values, type(values))
 values = list(values)
-print(values, type(values))
+# print(values, type(values))
 
 # 4. values() 遍历所有value
 values = dict1.values() # dict_values([1, 2, 3, 4]) <class 'dict_values'>
-print(values, type(values))
+# print(values, type(values))
 
 # 5. items() 遍历所有的键值对
 values = dict1.items() # dict_items([('one', 1), ('two', 2), ('three', 3), ('four', 4)]) <class 'dict_items'>
-print(values, type(values))
-
-for k,v in dict1.items():
-    print(k,v)
+# print(values, type(values))
+#
+# for k,v in dict1.items():
+#     print(k,v)
 
 # 结合 items() 及字典推倒式
 dict2 = {k: v for k,v in (list(dict1.items()))}
-print(dict2)
+# print(dict2)
