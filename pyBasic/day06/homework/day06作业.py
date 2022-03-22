@@ -18,29 +18,25 @@
 # ```
 #
 # 3.
-#
 # ```
-# # 3,写代码实现
-# #
-# # v1 = {"alex","wusir","taibai"}
-# # v2 = []
-# # 循环让用户输入,如果用户输入的内容在v1中存在,就添加到v2中,
-# # 如果v1中不存在就添加的v1中,用户输入Q退出程序
+# 3,写代码实现
+#
 # v1 = {"alex","wusir","taibai"}
-# v3 = v1.copy()
 # v2 = []
-# while 1:
-#     word = input(">>>(输入Q退出)")
-#     if word == "Q":
-#         break
-#     for ci in v1:
-#         if word == ci:
-#             v2.append(word)
-#         else:
-#             v3.add(word)
-#     v1.update(v3)
-#     print(v1)
-#     print(v2)
+# 循环让用户输入,如果用户输入的内容在v1中存在,就添加到v2中,
+# 如果v1中不存在就添加的v1中,用户输入Q退出程序
+# v1 = {"alex","wusir","taibai"}
+# v2 = []
+# flag = input("请输入：")
+# while flag.upper() != "Q":
+#     if flag in v1:
+#         v2.append(flag)
+#     else:
+#         v1.add(flag)
+#     flag = input("请输入：")
+#
+# print(v1, v2)
+
 # ```
 #
 # 4.
@@ -51,21 +47,21 @@
 # 1.-1    字典的key  集合的元素
 # 2.""    字典的key  集合的元素
 # 3.None  字典的key  集合的元素
-# 4.[1,2]
-# 5.[]
+# 4.[1,2] 集合元素
+# 5.[]    集合元素
 # 6.(1,2,3)   字典的key  集合的元素
 # 7.("1") 字典的key  集合的元素
 # 8.(1,)  字典的key  集合的元素
-# 9.{1,2,3,4}
-# 10.{"name":"alex","name1":"wusir"}
+# 9.{1,2,3,4}  都不可以
+# 10.{"name":"alex","name1":"wusir"} 都不可以
 # ```
 #
 # 5.
 #
 # ```
-# # is 和 == 的区别是什么?
-# # # is 是判断两个变量是不是同一个内存地址
-# # # == 是判断两个变量值是否相等
+# is 和 == 的区别是什么?  is 比较内存地址， == 比较值
+# is 是判断两个变量是不是同一个内存地址
+# == 是判断两个变量值是否相等
 # ```
 #
 # 6.
@@ -81,19 +77,13 @@
 # # 看代码写结果并解释原因(以下看代码写结果,一定要自己先思考.在验证!)
 # #
 # v1 = {'k1':'v1','k2':[1,2,3]}
-#
 # v2 = {'k1':'v1','k2':[1,2,3]}
-#
-#
-# result1 = v1 == v2
-#
-# result2 = v1 is v2
+# result1 = v1 == v2  # true
+# result2 = v1 is v2 # False
 #
 # print(result1)    #True 两变量值相等
-#
 # print(result2)    #False 俩变量在相当于深拷贝字典地址不同但是元素值内存地址相同
 # ```
-#
 # 8.
 #
 # ```
@@ -109,13 +99,25 @@
 # 9.
 #
 # ```
-# # 看代码写结果并解释原因v1 = '人生苦短，我用Python'v2 = [1,2,3,4,v1]v1 = "人生苦短，用毛线Python"print(v2)   #   [1,2,3,4,"人生苦短，我用Python"]            #   前两条语句执行完后相当于将v1值增加给v2,后面v1只变化后,v2的元素指向不变
+# # 看代码写结果并解释原因
+# v1 = '人生苦短，我用Python'
+# v2 = [1,2,3,4,v1]
+# v1 = "人生苦短，用毛线Python"
+# print(v2)   #   [1,2,3,4,"人生苦短，我用Python"]
+#   前两条语句执行完后相当于将v1值增加给v2,后面v1只变化后,v2的元素指向不变
 # ```
 #
 # 10.
 #
 # ```
-# # 看代码写结果,并解释原因info = [1,2,3]userinfo = [info,info,info,info,info]info[0] = '不仅多，还特么难呢'print(info,userinfo)    #   ['不仅多，还特么难呢',2,3] ['不仅多，还特么难呢','不仅多，还特么难呢','不仅多，还特么难呢','不仅多，还特么难呢','不仅多，还特么难呢']                        #   因为info[0]指向的地址变了但是info指向的地址不变
+# # 看代码写结果,并解释原因
+# info = [1,2,3]
+# userinfo = [info,info,info,info,info]
+# info[0] = '不仅多，还特么难呢'
+# print(info,userinfo)    #
+# ['不仅多，还特么难呢',2,3]
+# ['不仅多，还特么难呢','不仅多，还特么难呢','不仅多，还特么难呢','不仅多，还特么难呢','不仅多，还特么难呢']
+# 因为info[0]指向的地址变了但是info指向的地址不变
 # ```
 #
 # 11.
@@ -126,16 +128,16 @@
 # dic1 = {"k1":5,"k2":10}
 # dic2 = dic1.copy()
 # dic2["k1"] = 1
-# print(dic1["k1"] + dic2["k1"])  #   6   浅拷贝后两个字典的k1指向不同的内存地址
+# print(dic1["k1"] + dic2["k1"]) #   6   浅拷贝后两个字典的k1指向不同的内存地址
 # ```
 #
 # 12.
 #
 # ```
-# # 念数字给出一个字典. 在字典中标识出每个数字的发音.
-# # 包括相关符号. 然后由用户输入一个数字. 让程序读出相对应的发音(单纯的打印即可,不考虑个十百)
-# #
-# # 例如: 7.5 输出: qi_dian_wu
+# 念数字给出一个字典. 在字典中标识出每个数字的发音.
+# 包括相关符号. 然后由用户输入一个数字. 让程序读出相对应的发音(单纯的打印即可,不考虑个十百)
+##
+# 例如: 7.5 输出: qi_dian_wu
 #
 # dic = {
 # '0':'ling',
@@ -150,15 +152,22 @@
 # '9':'jiu',
 # '.':'dian',
 # }
-# while 1:
-#     st = ""
-#     num =input("输入一个数字:")
-#     if not num.startswith(".") and not num.endswith("."):
-#         if num.replace(".","",1).isdecimal():
-#             for i in num:
-#                 st += dic[i]+"_"
-#     s = st.strip("_")
-#     print(s)
+# num = input("请输入数字：")
+# str = ""
+# while num:
+#     num = num.strip().replace(" ", "")
+#     if "." in num:
+#         li = num.split(".")
+#         if len(li[1]) <= 1:
+#             str = dic[li[0].strip()] + " " + dic["."] + " " +dic[li[1]]
+#         else:
+#             str = dic[li[0].strip()] + " " + dic["."] + " "
+#             for j in li[1]:
+#                 str += dic[j] + " "
+#     else:
+#         str = dic[num]
+#     print(str)
+#     num = input("请输入数字：")
 # ```
 #
 # 13.
@@ -171,15 +180,15 @@
 # # 例如, 输⼊10
 # # lst = [1, 2, 3, 4, 5, 6, '咣', 8, 9, 10]
 #
-# word = input(">>>")
-# lst = []
-# if word.isdecimal():
-#     for num in range(1,int(word)+1):
-#         if (num%7) != 0:
-#             lst.append(num)
-#         else:
-#             lst.append("咣")
-# else:
-#     print("输入错误")
-# print(lst)
+
+list_7 = []
+num = input("任意整数：")
+if num.isdecimal():
+    for i in range(1, int(num)+1):
+        if i % 7 == 0:
+            i = "咣"
+        list_7.append(i)
+else:
+    print("输入错误!")
+print(list_7)
 # ```
