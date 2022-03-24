@@ -7,13 +7,13 @@
 # print(lis)
 
 # 4.求(x,y)其中x是0-5之间的偶数，y是0-5之间的奇数组成的元祖列表
-# tu = (tuple([i for i in range(6) if (i % 2) == 0]), tuple([j for j in range(6) if (j % 2) != 0]))
-# print(tu)
+# lis = [(x, y) for x in range(0, 6, 2) for y in range(1, 6, 2)]
+# print(lis)
 
 # 5.求M中3,6,9组成的列表M = [[1,2,3],[4,5,6],[7,8,9]]
-# M = [[1,2,3],[4,5,6],[7,8,9]]
-# lst = [i[2] for i in M]
-# print(lst)
+M = [[1,2,3],[4,5,6],[7,8,9]]
+lis = [i[2] for i in M]
+print(lis) # [3, 6, 9]
 
 # 6.求出50以内能被3整除的数的平方，并放入到一个列表中。
 # lst = [i for i in range(50) if (i % 3) == 0]
