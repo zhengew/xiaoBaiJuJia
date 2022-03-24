@@ -2,9 +2,9 @@
 # 2.用列表推导式做下列小题
 
 # 3.过滤掉长度小于3的字符串列表，并将剩下的转换成大写字母
-# l = ['asdgf', 'qwe', 'zxcvbn', 123]
-# lst = [i for i in l if type(i) == str and len(i) > 3]
-# print(lst)
+# l = ['asdgf', 'qwe', 'zxcvbn', 123, 'ab']
+# lis = [i for i in l if len(str(i)) >= 3]
+# print(lis)
 
 # 4.求(x,y)其中x是0-5之间的偶数，y是0-5之间的奇数组成的元祖列表
 # tu = (tuple([i for i in range(6) if (i % 2) == 0]), tuple([j for j in range(6) if (j % 2) != 0]))
