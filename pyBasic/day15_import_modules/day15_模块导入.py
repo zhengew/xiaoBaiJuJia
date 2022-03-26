@@ -42,6 +42,8 @@
 __all__ = ["函数名", ... ,"变量名"]
 方式二:
 __all__ = all["函数名", ... ,"变量名"]
+
+# 注意: __all__ 只对 form module import * 的导入方式生效.
 '''
 # 示例：
 from test import read1 as read
