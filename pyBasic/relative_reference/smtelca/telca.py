@@ -7,22 +7,19 @@ import sys
 # sys.path.append(os.path.dirname(__file__))
 
 # 实现相对导入
-# from ..smteller import teller
-
+from ..smteller.teller import *
 '''
-这个问题是因为我的包闯将的貌似不符合规范，先不管了
-    from ..smteller import teller
+    from ..smteller.teller import *
 ImportError: attempted relative import with no known parent package
 '''
 
-# teller.users()
 
 def telc():
     print(f"通过相对导入访问smteller/teller.py模块中的成员变量")
 
-def main():
-    telc()
-if __name__ == '__main__':
-    main()
+# def main():
+#     telc()
+# if __name__ == '__main__':
+#     main()
 
-print(__name__)
+# print(__name__)

@@ -9,3 +9,12 @@
 '''
 # 相对导入同项目下的模块
 
+import os, sys
+
+sys.path.append(os.path.dirname(__file__) + r"/login_moudles")
+# print(sys.path)
+
+from login_module.smtelca import telca
+
+telca.telc()
+# telca.users()
