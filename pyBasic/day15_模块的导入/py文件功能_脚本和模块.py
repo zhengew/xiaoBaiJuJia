@@ -32,13 +32,10 @@ import os
 # __file__ 获取当前文件所在路径
 print(__file__) # /Users/erwei.zheng/PycharmProjects/xiaoBaiJuJia/pyBasic/day15_模块的导入/py文件功能_脚本和模块.py
 # os.path.dirname(__file__) 获取当前文件所在的目录
-print(os.path.dirname(__file__) + r"/files/test.txt")
+print(os.path.dirname(__file__) + r"/files")
 
 # 导入 regi 报错，未找到 regi模块
 # import regi
 
 # 解决方式: 将 regi模块所在路径添加到 sys.path中
-sys.path.append(os.path.dirname(__file__) + r"/files/regi.py")
-print(sys.path)
-
-import
+sys.path.append(os.path.dirname(__file__))
