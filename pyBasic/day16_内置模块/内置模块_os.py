@@ -64,3 +64,6 @@ print(os.path.exists("a.txt"))
 print(os.path.isfile("a.txt"))
 
 # e> islink() 是否快捷键
+
+# os.listdir() 将当前目录下的文件或文件夹保存到列表
+print(os.listdir(os.path.dirname(__file__)))
