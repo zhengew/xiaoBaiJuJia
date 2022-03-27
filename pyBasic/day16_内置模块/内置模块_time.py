@@ -1,13 +1,30 @@
 ''' 内置模块 time
-1.常用方法
-1> time.sleep(secs) (线程)推迟指定的之间运行，单位为秒
-2> time.time() 获取当前的时间戳
-
 time模块三大对象:
 时间戳
 结构化时间对象(9大字段)
 字符串（重要）
+
+time.sleep() 线程睡眠时间 单位 秒
+
+1.时间戳 time.time()
+2.时间对象 GMT: time.gmtime()  本地时间: time.localtime()
+3.时间对象与字符串之间的相互转换 （常用）:
+1> 时间对象转换成字符串
+time.strftime(formart)
+2> 字符串转换成时间对象
+time.strptime(str, format)
+
+4.时间对象与时间戳之间的相互转换
+1> 时间对象转换成时间戳
+time.mktime(time.localtime())
+2>时间戳转换成时间对象
+time.gmtime()  time.localtime()
 '''
+
+''' time 模块
+
+'''
+
 import time
 
 # 时间戳：从时间元年(1970.1.1 00:00:00)到现在经过的秒数
@@ -53,3 +70,6 @@ t2 = time.mktime(t1) # 获取对应的时间戳
 print(t2)
 
 print(time.mktime(time.localtime())) # 1648305731.0
+
+
+
