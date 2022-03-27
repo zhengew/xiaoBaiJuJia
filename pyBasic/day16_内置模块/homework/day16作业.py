@@ -4,21 +4,21 @@ import os
 import time
 
 
-def register(username, password):
-    import os
-    import json
-    import hashlib
-    tellers = {}
-    m = hashlib.md5()
-    m.update(fr"{password}".encode("utf-8"))
-    pwd = m.hexdigest()
-    tellers.setdefault(username, pwd)
-    with open(file=os.path.join(os.path.dirname(os.path.dirname(__file__)),"files/users.txt"), mode="at", encoding="utf-8") as f:
-        f.seek(0,2)
-        f.write(json.dumps(tellers))
-        f.write("\n")
-        f.flush()
-        f.close()
+# def register(username, password):
+#     import os
+#     import json
+#     import hashlib
+#     tellers = {}
+#     m = hashlib.md5()
+#     m.update(fr"{password}".encode("utf-8"))
+#     pwd = m.hexdigest()
+#     tellers.setdefault(username, pwd)
+#     with open(file=os.path.join(os.path.dirname(os.path.dirname(__file__)),"files/users.txt"), mode="at", encoding="utf-8") as f:
+#         f.seek(0,2)
+#         f.write(json.dumps(tellers))
+#         f.write("\n")
+#         f.flush()
+#         f.close()
 
 
 #
@@ -30,7 +30,7 @@ def register(username, password):
 
 #
 # 2.利用递归寻找文件夹中所有的文件，并将这些文件的绝对路径添加到一个列表中返回（面试题，有点难，可先做其他）。
-'''
+
 # l = []
 # def dirfind(path):
 #     import os
@@ -43,23 +43,25 @@ def register(username, password):
 #     return l
 #
 #
-# print(dirfind(r'E:\studyP\bolg'))
-'''
+# files = dirfind(os.path.dirname(os.path.dirname(__file__)))
+# for i in files:
+#     print(i)
 
-def findAllFiles(path):
-    import os
-    files = [] # 保存当前目录及子目录下的所有文件
-    currDir = os.listdir(path)
-    for dir in currDir:
-        if os.path.isdir(os.path.join(path, dir)):
-            findAllFiles(os.path.join(path, dir))
-        elif os.path.isfile(os.path.join(path,dir)):
-            files.append(os.path.join(path,dir))
-    return files
 
-files = findAllFiles(os.path.dirname(os.path.dirname(__file__)))
-for i in files:
-    print(i)
+# files = [] # 保存当前目录及子目录下的所有文件
+# def findAllFiles(path):
+#     import os
+#     currDir = os.listdir(path)
+#     for dir in currDir:
+#         if os.path.isdir(os.path.join(path, dir)):
+#             findAllFiles(os.path.join(path, dir))
+#         elif os.path.isfile(os.path.join(path,dir)):
+#             files.append(os.path.join(path,dir))
+#     return files
+#
+# files = findAllFiles(os.path.dirname(os.path.dirname(__file__)))
+# for i in files:
+#     print(i)
 
 #
 # 3.写函数：用户输入某年某月，判断这是这一年的第几天（需要用Python的结构化时间）。
