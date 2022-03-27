@@ -71,5 +71,14 @@ print(t2)
 
 print(time.mktime(time.localtime())) # 1648305731.0
 
+'''
+5. 暂停当前进程，睡眠 xxx 秒
+time.sleep(xxx)
+'''
+for i in range(5):
+    print(time.strftime("%Y-%m-%d %H:%M:%S"))
+    # 休眠一秒钟
+    time.sleep(1)
+
 
 
