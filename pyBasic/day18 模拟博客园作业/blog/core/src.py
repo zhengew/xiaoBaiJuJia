@@ -1,17 +1,17 @@
 import os, sys
-
+from conf import  settings
+from lib import common
 status_dict = {
     'username': None,
     'status': False,
 }
-# 保存注册用户信息 格式为 用户名|密码|
-register_path = os.path.join(os.path.dirname(__file__), 'db/register.txt')
+
 
 # 获取用户密码
 def get_user_pwd(username):
     try:
         users = {}
-        with open(file=register_path, mode="r", encoding="utf-8") as r_f:
+        with open(file=settings.register_path, mode="r", encoding="utf-8") as r_f:
             for line in r_f:
                 users.setdefault(line.strip().split('|')[0], line.strip().split('|')[1].strip())
         return users[username]
@@ -37,7 +37,7 @@ c.密码要求：长度要在6~14个字符之间。
 '''
 def register():
     users = {}
-    with open(file=register_path, mode="r", encoding="utf-8") as r_f:
+    with open(file=settings.register_path, mode="r", encoding="utf-8") as r_f:
         for line in r_f:
             users.setdefault(line.strip().split('|')[0], line.strip().split('|')[1].strip())
     username = input("用户名(只能含有字母或数字):")
@@ -51,56 +51,30 @@ def register():
         if (len(password) < 6 or len(password) > 14):
             password = input("密码长度仅限(6-14个字符):")
 
-    with open(file=register_path, mode="a", encoding="utf-8") as w_f:
+    with open(file=settings.register_path, mode="a", encoding="utf-8") as w_f:
         w_f.seek(0, 2)
         w_f.write(f"{username}|{password}")
         w_f.write("\n")
 
-def auth(f):
-    '''
-    你的装饰器完成：访问被装饰函数之前，写一个三次登录认证的功能。
-    登录成功：让其访问被装饰得函数，登录没有成功，不让访问。
-    :param f:
-    :return:
-    '''
-    def inner(*args, **kwargs):
-        # 访问函数前进行三次登陆认证
-        flag = 3
-        if status_dict['status']:
-            ret = f(*args, **kwargs)
-            flag = 0
-            return ret
-        else:
-            print("请先登陆用户")
-        # 第一次验证失败，继续验证2次
-        while flag > 1:
-            if status_dict['status']:
-                ret = f(*args, **kwargs)
-                return ret
 
-            elif flag <= 1:
-                print("超过认证次数")
-            flag -= 1
 
-    return inner
-
-@auth  # article = auth(article)
+@common.auth  # article = auth(article)
 def article():
     print('欢迎访问文章页面')
 
-@auth
+@common.auth
 def comment():
     print('欢迎访问评论页面')
 
-@auth
+@common.auth
 def dariy():
     print('欢迎访问日记页面')
 
-@auth
+@common.auth
 def collections():
     print('欢迎访问收藏页面')
 
-@auth
+@common.auth
 def login_out():
     status_dict['username'] = None
     status_dict['status'] = False
