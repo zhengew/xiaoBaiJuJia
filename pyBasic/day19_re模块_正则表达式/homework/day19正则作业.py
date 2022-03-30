@@ -66,3 +66,9 @@ if res:
 # 1\d{3,5}?x
 
 
+# 找到lianjia.html中
+reg = '<div class="title">.*?data-sl="">(?P<name1>.*?)</a>.*?data-el="region">(?P<name2>.*?)</a>.*?<span class="divide">/</span>(?P<name3>.*?)<span'
+with open('lianjia.html', mode='r', encoding='utf-8') as f:
+    contents = f.read()
+    res = re.search(reg, contents, flags=re.S)
+    print(res.group('name1'), res.group('name2'), res.group('name3'))
