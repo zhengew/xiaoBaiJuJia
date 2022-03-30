@@ -1,8 +1,8 @@
 import logging
-fr
+from logging import handlers
 import time
-rh = handlers.RotatingFileHandler('myapp.log', maxBytes=1024,backupCount=5) # 按照大小做切割
-fh = handlers.TimedRotatingFileHandler(filename='x2.log', when='s', interval=5, encoding='utf-8')
+rh = handlers.RotatingFileHandler('myapp.log', maxBytes=1024*1024,backupCount=5) # 按照大小做切割
+fh = handlers.TimedRotatingFileHandler(filename='x2.log', when='H', interval=5, encoding='utf-8')
 
 sh = logging.StreamHandler()
 logging.basicConfig(
