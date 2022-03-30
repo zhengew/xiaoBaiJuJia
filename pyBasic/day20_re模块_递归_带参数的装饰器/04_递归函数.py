@@ -40,7 +40,13 @@ sys.setrecursionlimit(100000)
     # 循环
     # 递归
 def func(num):
-    num * func(num - 1)
+    if num == 1:
+        return num
+    else:
+        return num * func(num-1)
+
+# res = func(5)
+# print(res)
 
 # 2. os 模块，查看一个文件夹下的所有文件，这个文件夹下面还有文件夹，不知道文件又多少层,不能用walk
 # 3. os 模块, 计算一个文件夹下所有文件的大小，这个文件夹下还有文件夹，不用用walk
@@ -94,3 +100,4 @@ def func(num):
 #     },
 #     '山东': {},
 # }
+
