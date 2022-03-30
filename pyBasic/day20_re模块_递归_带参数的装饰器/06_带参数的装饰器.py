@@ -46,9 +46,9 @@ def add_goods():
 
 def main():
     login()
-    register()
-    show_goods()
-    add_goods()
+    # register()
+    # show_goods()
+    # add_goods()
 
 if __name__ == '__main__':
     main()
