@@ -21,9 +21,122 @@
 
 # 递归练习
     # 遍历文件夹下的所有文件 -- 掌握
-    # 斐波那契额数列练习 -- 会写
-    # 三级菜单 -- 看懂并知道实现方法
+import os
+def find_files(path):
+    lst = os.listdir(path)
+    for name in lst:
+        abs_path = os.path.join(path, name)
+        if os.path.isfile(abs_path):
+            print(abs_path)
+        elif os.path.isdir(abs_path):
+            find_files(abs_path)
+
+# find_files(os.path.dirname(__file__))
+
     # 查看文件夹的总大小 -- 看懂并知道实现方法
+def get_files_size(path):
+    fileSizes = 0
+    lst = os.listdir(path)
+    for name in lst:
+        abs_path = os.path.join(path, name)
+        if os.path.isfile(abs_path):
+            fileSizes += os.path.getsize(abs_path)
+        elif os.path.isdir(abs_path):
+            ret = get_files_size(abs_path)
+            fileSizes += ret
+    return fileSizes
+
+# print(get_files_size(os.path.dirname(__file__)))
+
+    # 斐波那契额数列练习 -- 会写
+def fib(n, a=1, b=1): # 1 1 2 3 5 8 13 21
+    if n == 1 or n == 2:
+        return b
+    else:
+        a, b = b, a+b  # 此处 相当于 a = b, c= a+b
+        return fib(n-1, a, b)
+
+# print(fib(100))
+
+# 生成器
+# def fib2(n):
+#     if n == 1:
+#         yield 1
+#     else:
+#         yield from (1, 1)
+#         a, b = 1, 1
+#         while n > 2:
+#             a, b = b, a + b
+#             yield b
+#             n -= 1
+#
+# for i in fib2(100):
+#     print(i)
+
+    # 三级菜单 -- 看懂并知道实现方法
+        # 要求：输入 q 退出，外层函数打印 'wahaha'
+menu = {
+    '北京': {
+        '海淀': {
+            '五道口': {
+                'soho': {},
+                '网易': {},
+                'google': {}
+            },
+            '中关村': {
+                '爱奇艺': {},
+                '汽车之家': {},
+                'youku': {},
+            },
+            '上地': {
+                '百度': {},
+            },
+        },
+        '昌平': {
+            '沙河': {
+                '老男孩': {},
+                '北航': {},
+            },
+            '天通苑': {},
+            '回龙观': {},
+        },
+        '朝阳': {},
+        '东城': {},
+    },
+    '上海': {
+        '闵行': {
+            "人民广场": {
+                '炸鸡店': {}
+            }
+        },
+        '闸北': {
+            '火车战': {
+                '携程': {}
+            }
+        },
+        '浦东': {},
+    },
+    '山东': {},
+}
+
+def show_menu(citys):
+    while True:
+        for name in citys:
+            print(name)
+        name = input('>>>')
+        if citys.get(name):
+            dic = citys.get(name)
+            flag = show_menu(dic)
+            print(flag)
+            if not flag: return False
+        elif name.upper() == 'B':
+            return True
+        elif name.upper() == 'Q':
+            return  False
+
+# show_menu(menu)
+# print('wahh')
+
 # 算法（用递归实现）
     # 二分查找 [1,2,3,4,5,6,7,8,9, 10, 27, 36m 46, 58, 69] - 有序列表
         # in index 从列表中找到一个值的位置
