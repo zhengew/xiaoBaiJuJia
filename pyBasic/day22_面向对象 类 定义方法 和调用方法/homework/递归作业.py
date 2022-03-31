@@ -142,6 +142,17 @@ def show_menu(citys):
         # in index 从列表中找到一个值的位置
         # 实现上面的功能 -- 用代码实现 （今日作业）
 
+# def find_num(lis, index):
+#     length = len(lis)
+#
+#
+# def main():
+#     lis = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 27, 36, 46, 58, 69]
+#     find_num(lis)
+#
+# if __name__ == '__main__':
+#     main()
+
 
 # sys.argv 练习
     # 写一个脚本，在cmd里执行,完成文件的 复制，删除，重命名
@@ -150,14 +161,36 @@ def show_menu(citys):
     # python xxx.py  用户名 密码 rename 文件路径 目的地址
 
 # 练习 使用walk来计算文件夹的总大小
-# import os
-# g = os.walk(os.path.dirname(os.path.dirname(__file__)))
-# for i in g:
-#     # print(i)
-#     path, dir_lst, name_lst = i
-#     print(path, name_lst)
+import os
+def filesize(path):
+    lis = os.walk(path)
+    # print(lis)
+    size = 0
+    for name in lis:
+        # print(name[0], name[2])
+        for file in name[2]:
+            size += os.path.getsize(os.path.join(name[0], file))
+    return size
 
+def filesize2(path):
+    lis = os.listdir(path)
+    size = 0
+    for name in lis:
+        abs_path = os.path.join(path, name)
+        if os.path.isfile(abs_path):
+            size += os.path.getsize(abs_path)
+        elif os.path.isdir(abs_path):
+            ret = filesize2(abs_path)
+            size += ret
+    return size
 
+# def main():
+#     path = os.path.dirname(__file__)
+#     print(filesize(path))
+#     print(filesize2(path))
+
+# if __name__ == '__main__':
+#     main()
 # 整理笔记思路
     # 学习的梗概
         # 主要内容
