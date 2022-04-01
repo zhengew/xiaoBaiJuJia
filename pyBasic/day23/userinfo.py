@@ -1,33 +1,3 @@
-''' 练习题 '''
-
-# 继续完成 人狗大战
-# 你是人
-# 狗是一个npc
-# 你一个回合 狗一个回合
-# 狗掉的血是一个波动值
-# 闪避值
-
-# 继续完成计算器作业
-
-# 定义一个圆形，半径是这个圆形的属性，实例化一个半径为5的圆形，一个半径为10 的圆形
-    # 计算圆形的面积
-    # 计算圆的周长
-
-
-class Circle:
-    import math
-    def __init__(self, r):
-        self.r = r
-    def squar(self):
-        return round(math.pi * self.r * self.r, 2)
-
-    def perimeter(self):
-        return round(math.pi * 2 * self.r, 2)
-
-# r1 = Circle(5)
-# r2 = Circle(10)
-# print(r1.squar(), r1.perimeter())
-
 # 定义一个用户类，用户名和密码是这个类的属性，实例化两个用户，分别又不同的用户名和密码
     # 登陆成功后 才创建对象
     # 设计一个方法 修改密码 鉴权
@@ -37,6 +7,8 @@ class Users:
         self.username = username
         self.password = mk_md5(password)
 
+    def change_pwd(self): # 是要在类中加一个修改密码的功能，需求理解错误 20220331
+        pass
 
 #md5值
 def mk_md5(obj):
