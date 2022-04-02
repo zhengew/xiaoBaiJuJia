@@ -16,6 +16,8 @@ dir(类名)：查出的是一个名字列表
 类名.__class__# 实例对应的类(仅新式类中)
 
 '''
+print(dir(object))
+print(object.__dict__)
 
 # object 中有 init
 # 所有的类都默认的继承object
@@ -57,18 +59,18 @@ from types import FunctionType, MethodType
 # print(type(xb) is Cat)
 # print(isinstance(xb, Cat))
 #
-# class A:
-#     def func(self):
-#         print('in func')
-#
-# print(A.func) # 函数 # <function A.func at 0x106b61550>
-# a = A()
-# print(a.func) # 方法 # <bound method A.func of <__main__.A object at 0x106c2df70>>
-#
-# print(isinstance(a.func, FunctionType)) # False
-# print(isinstance(a.func, MethodType)) # True
-# print(isinstance(A.func, FunctionType)) # True
-# print(isinstance(A.func, MethodType)) # False
+class A:
+    def func(self):
+        print('in func')
+
+print(A.func) # 函数 # <function A.func at 0x106b61550>
+a = A()
+print(a.func) # 方法 # <bound method A.func of <__main__.A object at 0x106c2df70>>
+
+print(isinstance(a.func, FunctionType)) # False
+print(isinstance(a.func, MethodType)) # True
+print(isinstance(A.func, FunctionType)) # True
+print(isinstance(A.func, MethodType)) # False
 # print(a.__class__) # <class '__main__.A'>
 
 

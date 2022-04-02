@@ -13,8 +13,8 @@ python = Course('python', '6 month', 21800)
 #
 import pickle
 # 利用 pickle.dump 将对象写到文件中
-# with open('pickle_file', 'wb') as f:
-#     pickle.dump(python, f)
+with open('pickle_file', 'wb') as f:
+    pickle.dump(python, f)
 
 # 利用 pickle.load 将对象读取出来，前提是 定义的类存在啊
 with open('pickle_file', 'rb') as f:

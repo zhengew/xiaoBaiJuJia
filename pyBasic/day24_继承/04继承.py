@@ -138,37 +138,37 @@ class Dog:
 猫和狗在调用eat的时候，既调用自己的也调用父类的,
 在子类的方法中调用父类的方法：父类名.方法名(self)
 '''
-# class Animal:
-#     def __init__(self, name, food):
-#         self.name = name
-#         self.food = food
-#         self.blood = 100
-#         self.waise = 100
-#
-#     def eat(self):
-#         print(f'{self.name} is eating {self.food}')
-#
-#     def drink(self):
-#         print(f'{self.name} is drinking')
-#
-#     def slep(self):
-#         print(f'{self.name} is sleeping')
-#
-#
-# class Cat(Animal):
-#     def eat(self):
-#         self.blood += 100
-#         Animal.eat(self) # 如果自己有还想用父类的： 直接在子类的方法中调用父类的方法: 父类名.方法名(self)
-#     def climb_tree(self):
-#         print(f'{self.name}开始睡觉')
-#         self.drink()
-#
-# class Dog(Animal):
-#     def eat(self):
-#         self.waise += 100
-#         Animal.eat(self)
-#     def house_keep(self):
-#         print(f'{self.name}开始睡觉')
+class Animal:
+    def __init__(self, name, food):
+        self.name = name
+        self.food = food
+        self.blood = 100
+        self.waise = 100
+
+    def eat(self):
+        print(f'{self.name} is eating {self.food}')
+
+    def drink(self):
+        print(f'{self.name} is drinking')
+
+    def slep(self):
+        print(f'{self.name} is sleeping')
+
+
+class Cat(Animal):
+    def eat(self):
+        self.blood += 100
+        Animal.eat(self) # 如果自己有还想用父类的： 直接在子类的方法中调用父类的方法: 父类名.方法名(self)
+    def climb_tree(self):
+        print(f'{self.name}开始睡觉')
+        self.drink()
+
+class Dog(Animal):
+    def eat(self):
+        self.waise += 100
+        Animal.eat(self)
+    def house_keep(self):
+        print(f'{self.name}开始睡觉')
 #
 #
 # xb = Cat('小白', '猫粮')
