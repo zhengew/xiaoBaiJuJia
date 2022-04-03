@@ -42,10 +42,10 @@ class Apple(Payment):
         # 想办法调用微信支付 url连接 把dic传过去
         print('%s通过苹果支付%s钱成功' % (self.name, money))
 
-# aw = WeChat('alex')
-# aw.pay(400)
-# aa = Alipay('alex')
-# aa.pay(400)
+aw = WeChat('alex')
+aw.pay(400)
+aa = Alipay('alex')
+aa.pay(400)
 
 # 归一化设计
 # def pay(name, price, kind):

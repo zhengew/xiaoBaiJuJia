@@ -25,17 +25,17 @@
 经典类和新式类的区别：
 '''
 # 1.在单继承方面（无论是新式类还是经典类都是一样的）
-# class A:
-#     def func(self): pass
-#
-# class B(A):
-#     def func(self):pass
-#
-# class C(B):
-#     def func(self):pass
-#
-# class D(C):
-#     def func(self):pass
+class A:
+    def func(self): pass
+
+class B(A):
+    def func(self):pass
+
+class C(B):
+    def func(self):pass
+
+class D(C):
+    def func(self):pass
 
 # 寻找某一个方法的顺序：D - > C - > B -> A
 # 越往父类走，是深度
