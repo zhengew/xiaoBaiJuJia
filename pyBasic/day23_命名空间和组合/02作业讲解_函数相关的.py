@@ -51,7 +51,7 @@ def login():
 #                 if os.path.exists(sys.argv[4]) and os.path.exists(sys.argv[5]):
 #                     filename = os.path.basename(sys.argv[4])
 #                     path = os.path.join(sys.argv[5], filename)
-#                     shutil.copy2(sys.argv[5], path)
+#                     shutil.copy2(sys.argv[4], path)
 #             elif sys.argv[3].lower() == 'rm' and len(sys.argv) == 5:
 #                 if os.path.exists(sys.argv[4]):
 #                     if os.path.isfile(sys.argv[4]):

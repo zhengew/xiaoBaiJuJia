@@ -21,7 +21,7 @@ pickle:
 '''
 
 import pickle
-
+pickle.load
 #
 # bys = pickle.dumps([1, 2, 3])
 # print(bys, type(bys)) # b'\x80\x04\x95\x0b\x00\x00\x00\x00\x00\x00\x00]\x94(K\x01K\x02K\x03e.' <class 'bytes'>
