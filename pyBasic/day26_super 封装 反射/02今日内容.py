@@ -28,8 +28,22 @@
 
 # 类中的三个装饰器(内置函数)
 # property
-# classmethod
-# staticmethod
+    # 做了什么？
+    # setter
+    # deleter(自选是否要了解)
+
+    # classmethod
+    # staticmethod
 
 # 反射
+    # hasattr
+    # getattr
+    # 几种情况
+        # 反射模块中的内容
+        # 反射本文件中的内容
+        # 反射对象的属性或者绑定方法
+        # 反射类的静态变量
+    # callable 判断是否可调用
+    # 实际的例子 - 归一化设计的
+
 '''
