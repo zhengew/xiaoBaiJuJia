@@ -18,7 +18,7 @@
     # 属性：圆形的半径/圆形的面积
     # 方法：登陆 注册
 
-# property 装饰的这个方法，不能有参数
+''' property 装饰的这个方法，不能有参数 '''
 # import time
 # class Person:
 #     def __init__(self, name, birth):
@@ -43,7 +43,7 @@
 #
 # alex = User('alex', 'sbsbsb')
 # print(alex.pwd)
-# alex.pwd = 123456 # property 装饰的这个方法，不能有参数
+# alex.pwd = 123456 # AttributeError: can't set attribute
 
 ''' property 的第三个应用场景：和类的静态变量合作 '''
 # class Goods:

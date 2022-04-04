@@ -45,7 +45,7 @@
 #     # 反射优化版本
 #     class_name = getattr(sys.modules['__main__'], kind)  # 通过反射获取了本文件中对应类的内存地址
 #     obj = class_name(name)
-#     obj.pay(price)
+#     obj.pay(psssssrice)
 
     # 原始版本
     # if kind == 'Wechat':

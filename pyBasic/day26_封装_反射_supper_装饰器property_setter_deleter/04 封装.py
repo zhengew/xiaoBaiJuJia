@@ -98,7 +98,7 @@ class User:
 # class Son(Foo):
 #     def __init__(self):
 #         self.__func()  # self._Son__func()
-
+#
 # Son() # AttributeError: 'Son' object has no attribute '_Son__func'
 
 
@@ -106,3 +106,4 @@ class User:
 # public 共有的  类内类外都能用，父类子类都能用             python支持
 # protect 保护的  类内能用，父类子类都能用，类外不能用       python不支持
 # private 私有的  本类的类内部都能用，其他地方都不能用       python支持
+
