@@ -14,7 +14,7 @@ py22.students.append('alex')
 py22.students.append('tbjx')
 py22.students.append('大壮')
 
-print(len(py22)) # 因为len函数在内部就是调用了__len__(), 重新len函数中的__len__方法
+print(len(py22)) # 因为len函数在内部就是调用了__len__(), 重写len函数中的__len__方法
 print(py22.__len__()) # 等价与 对象在调用自己类中的__len__,其实就是鸭子类型
 print(py22.len())
 

@@ -23,7 +23,7 @@ class Goods:
 # apple = Goods()
 # print(apple.price)
 #
-# apple.change_discount(0.1) # 类犯法可以通过对象名调用
+# apple.change_discount(0.1) # 类方法可以通过对象名调用
 # apple2 = Goods()
 # print(apple2.price)
 
