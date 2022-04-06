@@ -82,7 +82,7 @@ class Mypickle:
                 except EOFError:
                     break
 # 课程文件
-course_path = sys.path.join(sys.path.dirname(__file__), 'db', 'course')
+course_path = os.path.join(os.path.dirname(__file__), 'db', 'course')
 
 class Admin_opt(object):
     func_lst = [('创建课程', 'create_courses'), ('创建账号', 'create_account'),
@@ -98,8 +98,7 @@ class Admin_opt(object):
             period = input('周期: ').strip()
             teacher = input('授课老师: ').strip()
             course = Course(cname, price, period, teacher)
-            with open(course_path,mode='ab') as f:
-                Mypickle(course_path).dump(course)
+            Mypickle(course_path).dump(course)
         except:
             return '输入数据异常'
 
@@ -111,29 +110,28 @@ class Student_opt(object):
 
 def run():
     flag = True
-    while flag:
-        if login():
-            obj = None # 此处保存实例化的名字
-            if login_user['limits'] == '2':
-                obj = Admin_opt()
-                for index, opt in enumerate(Admin_opt.func_lst, 1):
-                    print(f'{index} : {opt[0]}')
-            elif login_user['limits'] == '1':
-                obj = Student_opt()
-                for index, opt in enumerate(Student_opt.func_lst, 1):
-                    print(f'{index} : {opt[0]}')
+    if login():
+        obj = None # 此处保存实例化的名字
+        if login_user['limits'] == '2':
+            obj = Admin_opt()
+            for index, opt in enumerate(Admin_opt.func_lst, 1):
+                print(f'{index} : {opt[0]}')
+        elif login_user['limits'] == '1':
+            obj = Student_opt()
+            for index, opt in enumerate(Student_opt.func_lst, 1):
+                print(f'{index} : {opt[0]}')
 
-            opt = input('尊敬的%s,欢迎登陆选课系统，请选择>>>'% login_user['name'])
-            if hasattr(obj, Admin_opt.func_lst[int(opt) - 1][1]):
-                getattr(obj, Admin_opt.func_lst[int(opt) - 1][1])()
-        else:
-            opt = input('用户名或密码错误,是否继续？按q退出>>>')
-            if opt.upper() == 'Q':
-                flag = quit()
+        opt = input('尊敬的%s,欢迎登陆选课系统，请选择>>>'% login_user['name'])
+        if hasattr(obj, Admin_opt.func_lst[int(opt) - 1][1]):
+            getattr(obj, Admin_opt.func_lst[int(opt) - 1][1])()
+    else:
+        opt = input('用户名或密码错误,是否继续？按q退出>>>')
+        if opt.upper() == 'Q':
+            flag = quit()
 
 def main():
-    # run()
-    course_path = sys.path.join(sys.path.dirname(__file__), r'db/course')
-    print(course_path)
+    run()
+    # for i in Mypickle(course_path).load():
+    #     print(i.__dict__)
 if __name__ == '__main__':
     main()
