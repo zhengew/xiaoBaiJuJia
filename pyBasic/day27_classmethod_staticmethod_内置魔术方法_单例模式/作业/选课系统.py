@@ -20,7 +20,7 @@ db文件：
     smteller
         sname(pk), pwd, limits (1.学生， 2.管理员)
 '''
-import time
+
 import os
 import sys
 import pickle
@@ -36,12 +36,11 @@ class Course(object):
         self.teacher = teacher
 
 class Student(object):
-    dic = []
-    def __init__(self, sname, cname):
+    def __init__(self, sname):
         self.sname = sname
-        self.dic.append(cname)
-
-
+        self.cnames = []
+    def append_cname(self,course):
+        self.cnames.append(course)
 
 class Teller(object):
     '''
@@ -176,10 +175,51 @@ class Sys_func(object):
         sname(pk), cname (已选课程)
         :return:
         '''
+
         self.show_courses()
         opt = input('请选择课程>>>').strip()
-        # for course in Mypickle(studentInfos_path).load():
+        f = Mypickle(studentInfos_path)
+        stu = Student(login_user['name'])
+        if os.path.exists(studentInfos_path):
+            if os.path.isfile(studentInfos_path):
+                for course in f.load():
+                    if opt in course.cnames:
+                        print(f'{login_user["name"]}已选择课程: {opt}')
+                        print(course.__dict__)
+                        break
+                else:
+                    stu.append_cname(opt)
+                    f.dump(stu)
+                    print('选课信息已写入studentInfos...')
 
+        else:
+            stu.append_cname(opt)
+            f.dump(stu)
+
+    # '查看已选课程', 'show_selected_course'
+    def show_selected_course(self):
+        stu_course = set()
+        for info in Mypickle(studentInfos_path).load():
+            if info.sname == login_user['name']:
+                stu_course.add(info.cnames[0])
+        print(stu_course)
+
+    # '查看所有学生选课情况', 'show_stu_course'
+    def show_stu_course(self):
+        stu_course = []
+        for info in Mypickle(studentInfos_path).load():
+            stu_course.append((info.sname, info.cnames[0]))
+
+        infos = {}
+        for i in range(len(stu_course)):
+            name, value = stu_course[i]
+            infos.setdefault(name, set())
+
+        for key, value in stu_course:
+            infos[key].add(value)
+
+        for k, v in infos.items():
+            print(k, v)
 
 
 def run():
@@ -202,15 +242,8 @@ def run():
     else:
         print('用户名或密码错误')
 
-
 def main():
     run()
-
-    # with open(teller_path, 'ab') as f:
-    #     Mypickle(teller_path).dump(Teller('admin', '123456', '2'))
-
-    # for i in Mypickle(studentInfos_path).load():
-    #     print(i.__dict__)
 
 if __name__ == '__main__':
     main()
