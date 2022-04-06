@@ -82,11 +82,14 @@ class Mypickle:
                 except EOFError:
                     break
 
-class Admin_opt(object):
-    func_lst = [('创建课程', 'create_courses'), ('创建账号', 'create_account'),
+class Sys_func(object):
+    func_dic = {'2':[('创建课程', 'create_courses'), ('创建账号', 'create_account'),
                 ('查看所有课程', 'show_courses'), ('查看所有学生', 'show_students'),
                 ('查看所有学生选课情况', 'show_stu_course'), ('退出系统', 'quit'),
-                ]
+                ],\
+                '1':[('查看已选课程', 'show_selected_course'), ('查看所有课程', 'show_courses'),
+                ('选择课程', 'selected_courses'),('退出系统', 'quit')
+                ]}
 
     def create_courses(self):
         cname = input('课程名: ').strip()
@@ -110,19 +113,12 @@ def run():
     flag = True
     while flag:
         if login():
-            obj = None # 此处保存实例化的名字
-            if login_user['limits'] == '2':
-                obj = Admin_opt()
-                for index, opt in enumerate(Admin_opt.func_lst, 1):
-                    print(f'{index} : {opt[0]}')
-            elif login_user['limits'] == '1':
-                obj = Student_opt()
-                for index, opt in enumerate(Student_opt.func_lst, 1):
-                    print(f'{index} : {opt[0]}')
-
+            obj = Sys_func() # 此处保存实例化的名字
+            for index, opt in enumerate(Sys_func.func_dic[login_user['limits']], 1):
+                print(f'{index} : {opt[0]}')
             opt = input('尊敬的%s,欢迎登陆选课系统，请选择>>>'% login_user['name'])
-            if hasattr(obj, Admin_opt.func_lst[int(opt) - 1][1]):
-                getattr(obj, Admin_opt.func_lst[int(opt) - 1][1])()
+            if hasattr(obj, Sys_func.func_dic[login_user['limits']][int(opt) - 1][1]):
+                getattr(obj, Sys_func.func_dic[login_user['limits']][int(opt) - 1][1])()
         else:
             opt = input('用户名或密码错误,是否继续？按q退出>>>')
             if opt.upper() == 'Q':
