@@ -1,3 +1,4 @@
+import os
 import sys
 # import glance
 # 导入一个包(文件夹)相当于执行了这个包下的__init__文件
