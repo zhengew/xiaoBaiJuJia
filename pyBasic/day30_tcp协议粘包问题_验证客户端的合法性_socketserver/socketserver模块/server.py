@@ -18,23 +18,6 @@ server.serve_forever()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # import socket
 #
 # sk = socket.socket()

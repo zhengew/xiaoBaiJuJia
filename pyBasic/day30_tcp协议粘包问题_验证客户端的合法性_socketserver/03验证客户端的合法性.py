@@ -15,3 +15,5 @@ import hmac # 替代hashlib模块的
 h = hmac.new(b'alex_sb',os.urandom(32),digestmod='MD5')
 ret = h.digest()
 print(ret)
+
+print(os.urandom(32))

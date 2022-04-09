@@ -13,7 +13,7 @@
 
 # ud协议的多人通信
     # socket(type=socket.SOCK_DGRAM)
-    # send to 需要写一个对方的地址
+    # sendto 需要写一个对方的地址
     # recvfrom 接收消息和地址
     # close 关闭服务/连接
 
