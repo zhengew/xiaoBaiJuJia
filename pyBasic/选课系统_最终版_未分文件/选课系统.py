@@ -6,7 +6,7 @@ import os
 USERINFO = '/Users/erwei.zheng/PycharmProjects/xiaoBaiJuJia/pyBasic/选课系统_最终版/db/userinfo'
 STUINFO = '/Users/erwei.zheng/PycharmProjects/xiaoBaiJuJia/pyBasic/选课系统_最终版/db/stuinfo'
 COURSE = '/Users/erwei.zheng/PycharmProjects/xiaoBaiJuJia/pyBasic/选课系统_最终版/db/course'
-login_user = None
+login_user = ''
 class Course(object):
     def __init__(self,name, price, period, teacher):
         self.name = name
@@ -41,19 +41,31 @@ class Student(object):
             while True:
                 try:
                     obj = pickle.load(f)
-                    print(obj.__dict__)
-                    w = open('temp', mode='wb')
+                    w = open('temp', mode='ab')
                     if obj.name == login_user:
-                        obj.cname.append(opt)
-                    pickle.dump(obj, w)
+                        if opt in obj.cname:
+                            if os.path.exists('temp'): os.remove('temp')
+                            return '%s已选择课程:%s'% (obj.name, opt)
+                        else:
+                            obj.cname.append(opt)
+                            pickle.dump(obj,w)
+                    else:
+                        pickle.dump(obj,w)
                 except EOFError:
                     break
-
         os.remove(STUINFO)
         os.rename('temp', STUINFO)
         return '选择课程成功'
 
-    def show_selected(self): pass
+    def show_selected(self):
+        with open(STUINFO, mode='rb') as f:
+            while True:
+                try:
+                    obj = pickle.load(f)
+                    if obj.name == login_user:
+                        print('%s : %s' % (obj.name, str(obj.cname)))
+                except EOFError:
+                    break
 
     def exit(self):
         sys.exit()
@@ -144,7 +156,6 @@ class Manager(object):
                 except EOFError:
                     break
 
-
     def show_students(self):
         with open(STUINFO, mode='rb') as f:
             index = 1
@@ -156,7 +167,14 @@ class Manager(object):
                 except EOFError:
                     break
 
-    def show_stu_course(self): pass
+    def show_stu_course(self):
+        with open(STUINFO, mode='rb') as f:
+            while True:
+                try:
+                    obj = pickle.load(f)
+                    print('%s : %s' % (obj.name, str(obj.cname)))
+                except EOFError:
+                    break
 
     def exit(self):
         sys.exit()
@@ -173,28 +191,25 @@ def login():
                 uname, upwd, ident = info.strip().split('|')
                 if name == uname and pwd == upwd:
                     return uname, ident
-
-
-
+            else:
+                return False
 
 def main():
     ret = login()
-    login_user = ret[0]
-    print(login_user)
     if ret:
-        cls = getattr(sys.modules[__name__], ret[1])
-        for index, opt in enumerate(cls.opt_lst,1):
-            print(index, opt[0])
-        obj = cls(ret[0])
-        opt = int(input('请选择:').strip())
-        if hasattr(obj, cls.opt_lst[opt-1][1]):
-            res = getattr(obj,  cls.opt_lst[opt-1][1])()
-            if res != None:
-                print(res)
+        while True:
+            sys.modules[__name__].login_user = ret[0]
+            cls = getattr(sys.modules[__name__], ret[1])
+            for index, opt in enumerate(cls.opt_lst,1):
+                print(index, opt[0])
+            obj = cls(ret[0])
+            opt = int(input('请选择:').strip())
+            if hasattr(obj, cls.opt_lst[opt-1][1]):
+                res = getattr(obj,  cls.opt_lst[opt-1][1])()
+                if res != None:
+                    print(res)
     else:
         print('用户名或密码错误')
-
-
 
 if __name__ == '__main__':
     main()
