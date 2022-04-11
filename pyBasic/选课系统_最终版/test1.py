@@ -5,19 +5,9 @@ class Student(object):
 
     opt_lst = [('查看课程', 'show_courses'),('选择课程','choose_course'),
                    ('查看已选课程', 'show_selected'), ('退出', 'exit')]
-
     def __init__(self, name):
         self.name = name
         self.cname = [] # 存储课程
-
-# with open(STUINFO, mode='rb') as f:
-#     while True:
-#         try:
-#             stu =  pickle.load(f)
-#             print(stu.__dict__)
-#         except EOFError:
-#             break
-
 
 
 s1 = Student('alex')
