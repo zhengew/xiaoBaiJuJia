@@ -18,4 +18,3 @@ if __name__ == '__main__':
         Process(target=talk, args=(conn,)).start() # args 接收的是一个元组类型(conn,)
 
     sk.close()
-
