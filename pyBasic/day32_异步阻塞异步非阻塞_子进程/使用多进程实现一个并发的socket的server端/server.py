@@ -1,15 +1,19 @@
-import socket
 from multiprocessing import Process
-sk = socket.socket()
-sk.bind(('127.0.0.1', 9001))
-sk.listen()
+import socket
 
-conn, addr = sk.accept()
-while True:
-    msg = conn.recv(1024).decode('utf-8')
-    ret = msg.upper().encode('utf-8')
-    conn.send(ret)
+def talk(conn):
+    while True:
+        msg = conn.recv(1024).decode('utf-8')
+        conn.send(msg.upper().encode('utf-8'))
+    conn.close()
 
-conn.close()
-sk.close()
 
+if __name__ == '__main__':
+    sk = socket.socket()
+    sk.bind(('127.0.0.1', 9001))
+    sk.listen()
+
+    while True:
+        conn, addr = sk.accept()
+        Process(target=talk, args=(conn,)).start()
+    sk.close()
