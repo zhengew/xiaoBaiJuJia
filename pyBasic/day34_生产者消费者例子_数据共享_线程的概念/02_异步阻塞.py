@@ -10,7 +10,7 @@ def producer(name, url, q):
     ret = requests.get(url)
     q.put((name, ret.text))
 
-def counsmer(q):
+def consmer(q):
     while True:
         tup =  q.get()
         if tup == None:break
@@ -25,7 +25,7 @@ if __name__ == '__main__':
         p.start()
         pl.append(p)
 
-    Process(target=counsmer, args=(q,)).start()
+    Process(target=consmer, args=(q,)).start()
 
     for p in pl:
         p.join()
