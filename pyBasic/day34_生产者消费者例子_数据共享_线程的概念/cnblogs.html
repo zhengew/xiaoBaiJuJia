@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="引言 亲爱的同学们，当你们打开这篇作业的时候，恭喜你们，python的基础课程你们已经学完一半了。面向对象是大家在学习过程中的一个重要转折，从这里开始，你们需要切换成另外一种思维来编写程序，这将非常有" />
+    <meta property="og:description" content="引言 亲爱的同学们，当你们打开这篇作业的时候，恭喜你们，python的基础课程你们已经学完一半了。面向对象是大家在学习过程中的一个重要转折，从这里开始，你们需要切换成另外一种思维来编写程序，这将非常有" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>学生选课系统 —— 作业需求 - Eva_J - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=5hM-3_wvH6PqtSEv_spqLegP-p5ewW4MjHPc5XUl0LI" />
+    <link id="MainCss" rel="stylesheet" href="/skins/loveisintheair/bundle-loveisintheair.min.css?v=2eeF5VFetkv0ebUrveBo_MjLCMmhO1B4PudZOUBLn1Y" />
+    <link id="highlighter-theme-cnblogs" type="text/css" rel="stylesheet" href="/css/hljs/cnblogs.css?v=yKPfCbE6NGwg5Jn8Cm5G98RHufDcX_NIbkGDyVPvWPQ" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/Eva-J/custom.css?v=rKGUVHFGFpiR&#x2B;DZgzLkCajyLL&#x2B;Y=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/loveisintheair/bundle-loveisintheair-mobile.min.css?v=QMjUYyiW3U98MKzzhoS-HpCR0NPFcHebvYvrnVmw_D4" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/Eva-J/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/Eva-J/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/Eva-J/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 250832;
+        var currentBlogApp = 'Eva-J';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'LoveIsIntheAir';
+        var visitorUserId = '';
+        var hasCustomScript = false;
+        try {
+            if (hasCustomScript && document.referrer && document.referrer.indexOf('baidu.com') >= 0) {
+                Object.defineProperty(document, 'referrer', { value: '' });
+                Object.defineProperty(Document.prototype, 'referrer', { get: function(){ return ''; } });
+            }
+        } catch(error) { }
+        window.codeHighlightEngine = 1;
+        window.enableCodeLineNumber = false;
+        window.codeHighlightTheme = 'cnblogs';
+    </script>
+        <script>
+            var currentPostDateAdded = '2018-06-28 16:44';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=6y4ap5bMZh5QALlakkDFkuNMrIRiy4lnEHysS0Mpbt0"></script>
+    
+    
+    
+</head>
+<body class="skin-loveisintheair has-navbar">
+    <a name="top"></a>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding">
+                    <a href="https://www.cnblogs.com/" title="开发者的网上家园" role="banner">
+                            <img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" />
+                    </a>
+                </li>
+                <li><a href="/" onclick="countClicks('skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="countClicks('nav', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="countClicks('nav', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/huawei" onclick="countClicks('nav', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="countClicks('nav', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="countClicks('nav', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get" role="search">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="search" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <a id="navbar_lite_mode_indicator" data-current-page="blog" style="display: none" href="javascript:void(0)" alt="简洁模式" title="简洁模式启用，您在访问他人博客时会使用简洁款皮肤展示">
+                        <img class="navbar-icon" src="/images/aggsite/lite-mode-on.svg" alt="简洁模式" />
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="page_begin_html">
+        <h2 style="line-height: 1.5em; float: left; text-align: right; color: rgba(129, 109, 101, 1); position: absolute; top: 110px; left: 110px; background: rgba(210, 238, 244, 1)">程序媛</h2>
+    </div>
+    
+<!--done-->
+<center>
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a href="https://www.cnblogs.com/Eva-J/"><img id="blogLogo" src="/skins/loveisintheair/images/logo.gif" alt="" /></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/Eva-J/">Eva_J</a>
+</h1>
+<h2></h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+	<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+	<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/Eva-J/">
+首页</a>
+</li>
+	<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+	<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/Eva_J">
+联系</a></li>
+	<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+	<li>
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/Eva-J/rss/">
+订阅</a>
+	
+<a id="blog_nav_rss_image" href="https://www.cnblogs.com/Eva-J/rss/">
+    <img src="/skins/loveisintheair/images/xml.gif" alt="订阅" />
+</a></li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div class="clear"></div>
+	<div id="topicList">
+		<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class = "postTitle">
+			
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/Eva-J/articles/9235899.html">
+    <span role="heading" aria-level="2">学生选课系统 —— 作业需求</span>
+    
+</a>
+
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body blogpost-body-html">
+<h1>引言</h1>
+<p>　　亲爱的同学们，当你们打开这篇作业的时候，恭喜你们，python的基础课程你们已经学完一半了。面向对象是大家在学习过程中的一个重要转折，从这里开始，你们需要切换成另外一种思维来编写程序，这将非常有利于你们未来开发功能复杂的项目，所以请大家一定要用心来完成这部分的作业。</p>
+<p>&nbsp; &nbsp; &nbsp; 从这部分开始，我们的作业说明也变得更加复杂，因为所有的程序开发都是从核心功能出发的，所以我们在开发的时候首先要完成的总是最主要的功能，以后大家还要慢慢学会自己提取“核心的功能”、进行“需求分析”，“程序设计”等工作来保证你们能够顺利成长为一个优秀的程序员。但是由于各位是初学者，所以先由我们来替你们完成这些基础工作，你们只管写代码就好了。</p>
+<h1>核心功能</h1>
+<h2>功能概述</h2>
+<p>学生选课</p>
+<h2>需求分析</h2>
+<p>　　从“学生选课系统” 这几个字就可以看出来，我们最核心的功能其实只有 <strong>选课。</strong></p>
+<h3><strong><strong>角色 </strong></strong></h3>
+<p><strong><strong>　　学生、管理员</strong></strong></p>
+<h3><strong>功能</strong></h3>
+<p><strong>　　<strong>登陆 ： </strong></strong>管理员和学生都可以登陆，且登陆之后可以自动区分身份</p>
+<p><strong>　　选课 ： </strong>学生可以自由的为自己选择课程</p>
+<p><strong><strong><strong>　　</strong>创建用户 ： </strong></strong>选课系统是面向本校学生的，因此所有的用户都应该由管理员完成</p>
+<p><strong><strong>　　查看选课情况 ：</strong></strong>每个学生可以查看自己的选课情况，而管理员应该可以查看所有学生的信息</p>
+<h3><strong>工作流程</strong></h3>
+<p><strong>　　登陆 ：</strong>用户输入用户名和密码</p>
+<p><strong>　　判断身份 ：</strong>在登陆成果的时候应该可以直接判断出用户的身份 是学生还是管理员</p>
+<p><strong>　　学生用户 ：</strong>对于学生用户来说，登陆之后有三个功能</p>
+<p>　　　　　　　1、查看所有课程</p>
+<p>　　　　　　　2、选择课程</p>
+<p>　　　　　　　3、查看所选课程</p>
+<p>　　　　　　　4、退出程序</p>
+<p><strong>&nbsp; &nbsp; &nbsp; 管理员用户：管理员用户除了可以做一些查看功能之外，还有很多创建工作</strong></p>
+<p>　　　　　　　1、创建课程</p>
+<p>　　　　　　　2、创建学生学生账号</p>
+<p>　　　　　　　3、查看所有课程</p>
+<p>　　　　　　　4、查看所有学生</p>
+<p>　　　　　　　5、查看所有学生的选课情况</p>
+<p>　　　　　　　6、退出程序</p>
+<h3>程序设计</h3>
+<p>对于复杂的功能，我们首先就应该想到面向对象编程。而要想将面向对象的程序开发好，就应该做好类和对象的分析工作。</p>
+<div class="cnblogs_code"><img id="code_img_closed_d11384ad-c396-4ec2-b9bc-f3d52a60863c" class="code_img_closed" src="https://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt=""><img id="code_img_opened_d11384ad-c396-4ec2-b9bc-f3d52a60863c" class="code_img_opened" style="display: none" src="https://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="">
+<div id="cnblogs_code_open_d11384ad-c396-4ec2-b9bc-f3d52a60863c" class="cnblogs_code_hide">
+<pre><span style="color: rgba(0, 0, 0, 1)">　　选课系统简单的划分其实只有两个角色：管理员和学生。
+
+　　仔细思考，你会发现有很多想不通的地方，比如学生选课，课从哪里来？
+
+　　这样一想就会发现，其实课程应该可以由管理员创造出来，那么课程又会有很多属性：价格、周期、课程名、授课老师等等
+
+　　那么课程也应该是一个类。</span></pre>
+</div>
+<span class="cnblogs_code_collapse">分析过程</span></div>
+<p>综上，本程序最基础的分析已经完毕。接下来我们要把所有的类以及其中的属性、方法设计出来</p>
+<h4><strong>课程</strong></h4>
+<p>　　属性：课程名、价格、周期、老师</p>
+<p>　　<span style="color: rgba(136, 136, 136, 1)"><em>*课程并没有什么动作，所以我们只设计属性不设计方法。其实这里还可以设计很多属性，比如课程的开始时间、结束时间、教室等等，只要你需要，这些都可以记录下来，但是这里我们为了简化代码，就先不设计这些了。</em></span></p>
+<h4>学生</h4>
+<p>　　属性：姓名、所选课程</p>
+<p>　　方法：查看可选课程、选择课程、查看所选课程、退出程序　　</p>
+<h4>管理员</h4>
+<p>　　属性：姓名</p>
+<p>　　方法：创建课程、创建学生学生账号、查看所有课程、查看所有学生、查看所有学生的选课情况、退出程序</p>
+<h2>流程图</h2>
+<p><img src="https://images2018.cnblogs.com/blog/827651/201806/827651-20180628165300991-2103613633.png" alt="" width="407" height="334"></p>
+<h2>采分点</h2>
+<p>　　1.类的创建和规划 30分</p>
+<p>　　2.登陆自动识别身份 10分</p>
+<p>　　3.管理员创建各种信息 20分</p>
+<p>　　4.学生选课 20分</p>
+<p>　　5.将内存中的数据保存到文件中 10分</p>
+<p>　　6.代码简洁、调理清晰10分</p>
+</div>
+<div class="clear"></div>
+<div id="blog_post_info_block" role="contentinfo">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+		</div>
+		<div class="postDesc">posted @ 
+<span id="post-date">2018-06-28 16:44</span>&nbsp;
+<a href="https://www.cnblogs.com/Eva-J/">Eva_J</a>&nbsp;
+阅读(<span id="post_view_count">7601</span>)&nbsp;
+评论(<span id="post_comment_count">5</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditArticles.aspx?postid=9235899" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(9235899);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '9235899', targetLink: 'https://www.cnblogs.com/Eva-J/articles/9235899.html', title: '学生选课系统 —— 作业需求' })">举报</a></div>
+	</div>
+	
+	
+</div><!--end: topics 文章、评论容器-->
+
+<script>
+    var cb_entryId = 9235899, cb_entryCreatedDate = '2018-06-28 16:44', cb_postType = 2, cb_postTitle = '学生选课系统 —— 作业需求';
+    var allowComments = true, cb_blogId = 250832, cb_blogApp = 'Eva-J', cb_blogUserGuid = '4997edaa-857b-e511-9fc1-ac853d9f53cc';
+    mermaidRender.render()
+    markdown_highlight()
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+    updatePostStats(
+            [cb_entryId],
+            function(id, count) { $("#post_view_count").text(count) },
+            function(id, count) { $("#post_comment_count").text(count) })
+</script>
+<a id="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="cnblogs_ch"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+            <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+        <div id="cnblogs_c2" class="under-post-card">
+            <a href="https://developer.huawei.com/consumer/cn/forum/topic/0202851788421280176?fid=23&amp;ha_source=bokeyuan&amp;ha_source=HeZuo30&amp;ha_sourceId=89000081" rel="nofollow" target="_blank" onclick="countCreativeClicks('C2-华为-codelabs')">
+                <img src="https://img2022.cnblogs.com/blog/35695/202204/35695-20220413123003334-931328747.jpg" alt="" onload="countCreativeImpressions('C2-华为-codelabs')" />
+            </a>
+        </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+        var commentManager = new blogCommentManager();
+        commentManager.renderComments(0);
+        fixPostBody();
+
+                        window.tocManager.displayDisableTocTips = false;
+                        window.tocManager.generateToc();
+            setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverT2();
+        deliverC1C2();
+        loadNewsAndKb();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+</div>
+
+
+	</div><!--end: topicList 文章列表容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+			<div id="calendar"><div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                    <script>loadBlogDefaultCalendar();</script></div>
+			
+			<DIV id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</DIV>
+			
+		</div><!--end: sideBarMain -->
+		<div class="clear"></div>
+		<div id="footer">
+			<!--done-->
+Copyright &copy; 2022 Eva_J
+<br /><span id="poweredby">Powered by .NET 6 on Kubernetes</span>
+
+
+
+		</div><!--end: footer -->
+	</div><!--end: sideBar 侧边栏容器 -->
+</div><!--end: home 自定义的最大容器 -->
+</center>
+
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8AuMt_3FvyxIgNOR82PHE4kVYqz1YApPRzh8DFJEncRyp6kckbtNqcugpcuHuB7uj__klnvKg5_qExhk5V_uhqxW0l-LoRwGMhIoPdNxaJA_XjjQrVb380HNHA7drg6SFoZr7rYmWIVSapy_pB_Vt-g" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-476124-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        var kv = getGACustom();
+        if (kv) {
+            gtag('set', kv);
+        }
+        gtag('config', 'UA-476124-1');
+    </script>
+<script defer src="https://hm.baidu.com/hm.js?866c9be12d4a814454792b1fd0fed295"></script>
+</body>
+</html>
