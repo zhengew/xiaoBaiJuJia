@@ -41,3 +41,5 @@ from queue import Empty # 不是内置的错误类型，而是queue模块中的�
 # print(priq.get())
 # print(priq.get())
 # print(priq.get())
+
+

@@ -21,7 +21,7 @@
 
 # 线程队列 主要记语法 import queue   get put get_nowait
     # 先进先出 Queue
-    # 先进先出 LifoQueue
+    # 后进先出 LifoQueue
     # 优先级 PriorityQueue
 
 
