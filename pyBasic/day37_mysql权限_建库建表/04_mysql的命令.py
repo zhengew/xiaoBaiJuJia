@@ -42,10 +42,10 @@ grant select, insert
 flush privileges;    # 刷新使授权立即生效
 
 grant select on day37.* to 'guest'@'172.16.238.4';
-# 创建账号并授权
+# 创建账号并授权 mysql 8.0 不支持
 mysql> grant all on *.* to 'eva'@'%' identified by '123'
 
-# 创建数据库
+# 创建数据库@
 create database day37;
 
 # 操作数据库
