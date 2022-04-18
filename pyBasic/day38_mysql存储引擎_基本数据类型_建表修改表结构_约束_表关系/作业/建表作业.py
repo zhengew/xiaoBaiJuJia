@@ -32,12 +32,13 @@ create table score(
 	sid int PRIMARY key auto_increment,
 	student_id int NOT NULL,
 	course_id int NOT NULL,
-	number float(4,1),
+	number float(4,1) DEFAULT(0.0),
 	CONSTRAINT student_sid_fk FOREIGN KEY(student_id) REFERENCES student(sid),
 	CONSTRAINT course_cid_fk FOREIGN KEY(course_id) REFERENCES course(cid)
 );
 commit;
 
 show tables;
+
 
 '''
