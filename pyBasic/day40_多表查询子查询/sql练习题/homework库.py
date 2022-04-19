@@ -61,12 +61,12 @@ select s.student_id, stu.sname/*, c.cname, s.num*/
 12 rows in set (0.00 sec)
 
 5、查询至少有一门课与学号为1的同学所学课程相同的同学的学号和姓名；
-select distinct s.course_id from score s where s.student_id = '1';
+select s.course_id from score s where s.student_id = '1';
 
 select distinct stu.sid, stu.sname
     from student stu
         inner join score s on s.student_id = stu.sid
-        where s.course_id in (select distinct s.course_id from score s where s.student_id = '1')
+        where s.course_id in (select s.course_id from score s where s.student_id = '1')
         and s.student_id != '1'
         order by stu.sname;
 +-----+--------+
@@ -171,7 +171,7 @@ having c2.num2 < c1.num1;
 
 9、查询“生物”课程比“物理”课程成绩高的所有学生的学号；
 
-select c2.student_id, stu.sname -- , c2.num2, c1.num1
+select c2.student_id -- , stu.sname , c2.num2, c1.num1
 from
 (select student_id, course_id, num as num1
     from (
@@ -271,12 +271,10 @@ select cid from course c where c.teacher_id = (select tid from teacher where tna
 select sid, sname
     from student
     where sid not in(
-        select student_id
-            from (select student_id, count(course_id) as num
+        select distinct student_id
+            from (select student_id
                     from score s
-                    group by student_id, course_id
-                    having course_id = (
-                        select cid from course c where c.teacher_id = (
+                    where course_id in( select cid from course c where c.teacher_id = (
                             select tid from teacher where tname = '张磊老师'))) stu);
 +-----+--------+
 | sid | sname  |
@@ -320,15 +318,16 @@ select s.student_id, stu.sname
 # 查询他交的课程
 select cid from course where teacher_id = (select tid from teacher where tname = '李平老师') -- 2, 4
 
-select distinct s.student_id, stu.sname
+select s.student_id, stu.sname -- , s.course_id
     from score s inner join student stu on s.student_id = stu.sid
     where s.course_id in (select cid from course where teacher_id = (select tid from teacher where tname = '李平老师'))
+    group by s.student_id
+    having count(s.student_id) = 2
     order by s.student_id;
 +------------+--------+
 | student_id | sname  |
 +------------+--------+
 |          1 | 理解   |
-|          2 | 钢蛋   |
 |          3 | 张三   |
 |          4 | 张一   |
 |          5 | 张二   |
@@ -340,7 +339,7 @@ select distinct s.student_id, stu.sname
 |         11 | 李四   |
 |         12 | 如花   |
 +------------+--------+
-12 rows in set (0.00 sec)
+11 rows in set (0.01 sec)
 
 1、查询没有学全所有课的同学的学号、姓名；
 # 找出学全的，在从student表排除
