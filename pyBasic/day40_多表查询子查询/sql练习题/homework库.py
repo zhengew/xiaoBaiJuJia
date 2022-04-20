@@ -398,11 +398,111 @@ from
 +------------+--------+
 1 row in set (0.00 sec)
 
-3、删除学习“叶平”老师课的SC表记录；
+3、删除学习“李平老师”老师课的SC表记录；
+# 找tid
+select tid from teacher where tname = '李平老师'
+# 找 cid
+select cid from course c where c.teacher_id = (select tid from teacher where tname = '李平老师');
+# 删除 cid对应的记录
+# delete from score s where s.course_id in(select cid from course c where c.teacher_id = (select tid from teacher where tname = '李平老师'))
+
+# 备份数据
+# create table score_back select * from score;
+# select * from score_back;
+
 4、向SC表中插入一些记录，这些记录要求符合以下条件：①没有上过编号“002”课程的同学学号；②插入“002”号课程的平均成绩； 
-5、按平均成绩从低到高显示所有学生的“语文”、“数学”、“英语”三门的课程成绩，按如下形式显示： 学生ID,语文,数学,英语,有效课程数,有效平均分；
+# 没上过002课程的学号
+select stu.sid from student stu where stu.sid not in (select student_id from score where course_id = '002')
++-----+
+| sid |
++-----+
+|   2 |
+|  13 |
+|  14 |
+|  15 |
+|  16 |
++-----+
+5 rows in set (0.00 sec)
+# 002 课程平均成绩
+select avg(num) from score s where s.course_id = '002';
++----------+
+| avg(num) |
++----------+
+|  65.0909 |
++----------+
+1 row in set (0.00 sec)
+# 插入数据
+insert into score values(null, 2, 2, 65.0909), (null, 13, 2, 65.0909), (null, 14, 2, 65.0909), (null, 15, 2, 65.0909), (null, 16, 2, 65.0909);
+
++------------+------+------+-----+---------+----------------+
+| Field      | Type | Null | Key | Default | Extra          |
++------------+------+------+-----+---------+----------------+
+| sid        | int  | NO   | PRI | NULL    | auto_increment |
+| student_id | int  | NO   | MUL | NULL    |                |
+| course_id  | int  | NO   | MUL | NULL    |                |
+| num        | int  | NO   |     | NULL    |                |
++------------+------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+5、按平均成绩从低到高显示所有学生的“生物”、“物理”、“体育”三门的课程成绩，按如下形式显示： 学生ID,语文,数学,英语,有效课程数,有效平均分；
+select cid from course where cname = '生物'; -- 1
+select cid from course where cname = '物理'; -- 2
+select cid from course where cname = '体育'; -- 3
+
+# 拿到每名学生的 生物物理体育成绩
+select s.student_id, s.num as biology from score s where s.course_id = (select cid from course where cname = '生物')
+select s.student_id, s.num as physics from score s where s.course_id = (select cid from course where cname = '物理')
+select s.student_id, s.num as sports from score s where s.course_id = (select cid from course where cname = '体育')
+
+# 取到学生的成绩和考试课程数，和平均分数
+select stu.sid 学生ID, b.biology 生物, p.physics 物理, s.sports 体育, count(b.biology) + count(p.physics) + count(s.sports) 有效课程数, sum(ifnull(b.biology, 0) + ifnull(p.physics, 0) + ifnull(s.sports, 0)) / 3 有效平均分
+    from student stu
+    left join (select s.student_id, s.num as biology from score s where s.course_id = (select cid from course where cname = '生物')) as b on stu.sid = b.student_id
+    left join (select s.student_id, s.num as physics from score s where s.course_id = (select cid from course where cname = '物理'))  as p on b.student_id = p.student_id
+    left join (select s.student_id, s.num as sports from score s where s.course_id = (select cid from course where cname = '体育')) as s on s.student_id = p.student_id
+    group by stu.sid , b.biology, p.physics, s.sports
+    order by stu.sid;
+
++----------+--------+--------+--------+-----------------+-----------------+
+| 学生ID   | 生物   | 物理   | 体育   | 有效课程数      | 有效平均分      |
++----------+--------+--------+--------+-----------------+-----------------+
+|        1 |     10 |      9 |   NULL |               2 |          6.3333 |
+|        2 |      8 |   NULL |   NULL |               1 |          2.6667 |
+|        3 |     77 |     66 |     87 |               3 |         76.6667 |
+|        4 |     79 |     11 |     67 |               3 |         52.3333 |
+|        5 |     79 |     11 |     67 |               3 |         52.3333 |
+|        6 |      9 |    100 |     67 |               3 |         58.6667 |
+|        7 |      9 |    100 |     67 |               3 |         58.6667 |
+|        8 |      9 |    100 |     67 |               3 |         58.6667 |
+|        9 |     91 |     88 |     67 |               3 |         82.0000 |
+|       10 |     90 |     77 |     43 |               3 |         70.0000 |
+|       11 |     90 |     77 |     43 |               3 |         70.0000 |
+|       12 |     90 |     77 |     43 |               3 |         70.0000 |
+|       13 |      9 |   NULL |   NULL |               1 |          3.0000 |
+|       14 |   NULL |   NULL |   NULL |               0 |          0.0000 |
+|       15 |   NULL |   NULL |   NULL |               0 |          0.0000 |
+|       16 |   NULL |   NULL |   NULL |               0 |          0.0000 |
++----------+--------+--------+--------+-----------------+-----------------+
+16 rows in set (0.00 sec)
+
 6、查询各科成绩最高和最低的分：以如下形式显示：课程ID，最高分，最低分；
+
+select s.course_id 课程ID, max(s.num) 最高分, min(s.num) 最低分
+    from score s
+    group by s.course_id
++----------+-----------+-----------+
+| 课程ID   | 最高分    | 最低分    |
++----------+-----------+-----------+
+|        1 |        91 |         8 |
+|        2 |       100 |         9 |
+|        3 |        87 |        43 |
+|        4 |       100 |        22 |
++----------+-----------+-----------+
+4 rows in set (0.00 sec)
+
 7、按各科平均成绩从低到高和及格率的百分数从高到低顺序；
+
+
 8、查询各科成绩前三名的记录:(不考虑成绩并列情况) 
 9、查询每门课程被选修的学生数；
 10、查询同名同姓学生名单，并统计同名人数；
@@ -415,6 +515,48 @@ from
 17、查询各个课程及相应的选修人数；
 18、查询不同课程但成绩相同的学生的学号、课程号、学生成绩；
 19、查询每门课程成绩最好的前两名；
+select * from
+(select student_id, course_id, num
+    from score
+    where course_id = '1'
+    order by num desc
+    limit 2) s1
+union
+select * from
+(select student_id, course_id, num
+    from score
+    where course_id = '2'
+    order by num desc
+    limit 2) s2
+union
+select * from
+(select student_id, course_id, num
+    from score
+    where course_id = '3'
+    order by num desc
+    limit 2) s3
+union
+select * from
+(select student_id, course_id, num
+    from score
+    where course_id = '4'
+    order by num desc
+    limit 2) s4;
+
++------------+-----------+-----+
+| student_id | course_id | num |
++------------+-----------+-----+
+|          9 |         1 |  91 |
+|         10 |         1 |  90 |
+|          6 |         2 | 100 |
+|          7 |         2 | 100 |
+|          3 |         3 |  87 |
+|         13 |         3 |  87 |
+|          4 |         4 | 100 |
+|          5 |         4 | 100 |
++------------+-----------+-----+
+8 rows in set (0.00 sec)
+
 20、检索至少选修两门课程的学生学号；
 21、查询全部学生都选修的课程的课程号和课程名；
 22、查询没学过“叶平”老师讲授的任一门课程的学生姓名；
