@@ -501,19 +501,185 @@ select s.course_id 课程ID, max(s.num) 最高分, min(s.num) 最低分
 4 rows in set (0.00 sec)
 
 7、按各科平均成绩从低到高和及格率的百分数从高到低顺序；
+# 求出各科平均成绩
 
 
-8、查询各科成绩前三名的记录:(不考虑成绩并列情况) 
+
+8、查询各科成绩前三名的记录:(不考虑成绩并列情况)
+select * from
+(select s.student_id, s.course_id, s.num
+    from score s
+    group by s.student_id, s.course_id, s.num
+    having s.course_id = 1
+    order by s.course_id, s.num desc
+    limit 3) s1
+    union
+select * from
+(select s.student_id, s.course_id, s.num
+    from score s
+    group by s.student_id, s.course_id, s.num
+    having s.course_id = 2
+    order by s.course_id, s.num desc
+    limit 3) s2
+    union
+select * from
+(select s.student_id, s.course_id, s.num
+    from score s
+    group by s.student_id, s.course_id, s.num
+    having s.course_id = 3
+    order by s.course_id, s.num desc
+    limit 3) s3
+    union
+select * from
+(select s.student_id, s.course_id, s.num
+    from score s
+    group by s.student_id, s.course_id, s.num
+    having s.course_id = 4
+    order by s.course_id, s.num desc
+    limit 3) s4;
++------------+-----------+-----+
+| student_id | course_id | num |
++------------+-----------+-----+
+|          9 |         1 |  91 |
+|         10 |         1 |  90 |
+|         11 |         1 |  90 |
+|          6 |         2 | 100 |
+|          7 |         2 | 100 |
+|          8 |         2 | 100 |
+|          3 |         3 |  87 |
+|         13 |         3 |  87 |
+|          2 |         3 |  68 |
+|          4 |         4 | 100 |
+|          5 |         4 | 100 |
+|          6 |         4 | 100 |
++------------+-----------+-----+
+12 rows in set (0.02 sec)
+
 9、查询每门课程被选修的学生数；
+# 按课程分组，统计
+select s.course_id, count(1)
+    from score s
+    group by s.course_id;
+
+
 10、查询同名同姓学生名单，并统计同名人数；
+select stu.sname, count(1) as num
+     from student stu
+     group by stu.sname
+     having stu.sname in(
+                     select sname
+                     from student
+                     group by sname
+                     having count(sname) > 1);
+
++--------+-----+
+| sname  | num |
++--------+-----+
+| 张三   |   2 |
++--------+-----+
+1 row in set (0.00 sec)
+
 11、查询每门课程的平均成绩，结果按平均成绩升序排列，平均成绩相同时，按课程号降序排列；
-12、查询平均成绩大于85的所有学生的学号、姓名和平均成绩；
-13、查询课程名称为“数学”，且分数低于60的学生姓名和分数；
-14、查询课程编号为003且课程成绩在80分以上的学生的学号和姓名； 
+select s.course_id, avg(s.num) as avg_num
+    from score s
+    group by s.course_id
+    order by avg_num asc, s.course_id desc;
+
++-----------+---------+
+| course_id | avg_num |
++-----------+---------+
+|         1 | 50.0000 |
+|         3 | 64.4167 |
+|         2 | 65.0625 |
+|         4 | 85.6154 |
++-----------+---------+
+4 rows in set (0.00 sec)
+
+12、查询平均成绩大于80的所有学生的学号、姓名和平均成绩；
+select s.sid, s.sname, s1.avg_n
+    from student s right join
+        (select student_id, avg(num) as avg_n
+            from score
+            group by student_id
+            having avg_n > 80) s1 on s1.student_id = s.sid;
+
++------+--------+---------+
+| sid  | sname  | avg_n   |
++------+--------+---------+
+|    3 | 张三   | 82.2500 |
++------+--------+---------+
+1 row in set (0.00 sec)
+
+13、查询课程名称为“物理”，且分数低于60的学生姓名和分数；
+select cid from course where cname = '物理';
+
+select stu.sname, s1.num
+ from student stu
+ right join
+    (select student_id, num
+     from score
+     where course_id = (select cid from course where cname = '物理')
+     and num < 60) s1
+ on stu.sid = s1.student_id;
+
++--------+-----+
+| sname  | num |
++--------+-----+
+| 理解   |   9 |
+| 张一   |  11 |
+| 张二   |  11 |
++--------+-----+
+3 rows in set (0.00 sec)
+
+14、查询课程编号为003且课程成绩在80分以上的学生的学号和姓名
+select stu.sid, stu.sname
+    from student stu right join(
+        select s.student_id
+        from score s where s.course_id = '003' and s.num > 80) s1 on s1.student_id = stu.sid;
++------+--------+
+| sid  | sname  |
++------+--------+
+|    3 | 张三   |
+|   13 | 刘三   |
++------+--------+
+2 rows in set (0.00 sec)
+
 15、求选了课程的学生人数
-16、查询选修“杨艳”老师所授课程的学生中，成绩最高的学生姓名及其成绩；
+select count(distinct student_id) from score;
++----------------------------+
+| count(distinct student_id) |
++----------------------------+
+|                         16 |
++----------------------------+
+1 row in set (0.00 sec)
+
+16、查询选修“张磊老师”老师所授课程的学生中，成绩最高的学生姓名及其成绩；
+select tid from teacher where tname = '张磊老师';
+select cid from course where teacher_id = (select tid from teacher where tname = '张磊老师')
+select max(num) from score where course_id in(select cid from course where teacher_id = (select tid from teacher where tname = '张磊老师'))
+
+#
+select s.sname, s1.num
+    from student s right join
+(select student_id, num from score where course_id in(select cid from course where teacher_id = (select tid from teacher where tname = '张磊老师'))
+    and num = (select max(num) from score where course_id in(select cid from course where teacher_id = (select tid from teacher where tname = '张磊老师')))
+) s1 on s.sid = s1.student_id;
+
++--------+-----+
+| sname  | num |
++--------+-----+
+| 李一   |  91 |
++--------+-----+
+1 row in set (0.00 sec)
+
 17、查询各个课程及相应的选修人数；
+select course_id, count(1) num
+    from score
+    group by course_id;
+
 18、查询不同课程但成绩相同的学生的学号、课程号、学生成绩；
+# 不会le 。。。
+
 19、查询每门课程成绩最好的前两名；
 select * from
 (select student_id, course_id, num
@@ -558,11 +724,43 @@ select * from
 8 rows in set (0.00 sec)
 
 20、检索至少选修两门课程的学生学号；
+select student_id, count(1) as n
+    from score
+    group by student_id
+    having n > 1;
+
++------------+---+
+| student_id | n |
++------------+---+
+|          1 | 3 |
+|          2 | 4 |
+|          3 | 4 |
+|          4 | 4 |
+|          5 | 4 |
+|          6 | 4 |
+|          7 | 4 |
+|          8 | 4 |
+|          9 | 4 |
+|         10 | 4 |
+|         11 | 4 |
+|         12 | 4 |
+|         13 | 4 |
++------------+---+
+13 rows in set (0.00 sec)
+
 21、查询全部学生都选修的课程的课程号和课程名；
+select s1.student_id, c.cid, c.cname
+    from course c right join (
+        select student_id, course_id
+            from score
+            group by student_id, course_id) s1 on c.cid = s1.course_id
+    order by s1.student_id, c.cid
+
 22、查询没学过“叶平”老师讲授的任一门课程的学生姓名；
 23、查询两门以上不及格课程的同学的学号及其平均成绩；
 24、检索“004”课程分数小于60，按分数降序排列的同学学号；
 25、删除“002”同学的“001”课程的成绩；
-
+select * from score where student_id = '002' and course_id = '001';
+-- delete from score where student_id = '002' and course_id = '001';
 更多练习
 '''
